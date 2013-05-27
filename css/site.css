@@ -36,7 +36,7 @@ a.button {border: none;}
 #wrapper {margin: 0px auto; max-width: 900px; padding-top: 40px; /*margin-left: 250px;*/}
 pre {word-wrap: break-word; padding: 14px; background: #F0F0F0; }
 code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font-size: 13px; color: #636363; font-weight: normal;}
-.button {padding: 5px 4px; background-color: #fff; font-size: 10px;}
+.button {padding: 5px 4px; background-color: #FF7031; font-size: 10px; color: #fff;}
 .dotted {margin: 20px -28px; padding: 20px 28px; background-color: #CCF4FF; border: 8px solid #47CCFC; margin-top: 44px; padding-top: 0px;}
 .dotted li {padding: 0px 2px;}
 .dotted h2 {margin-top: inherit;}
@@ -49,7 +49,7 @@ code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font
  #latestSpot li, #selectedSpot li{line-height: 34px;}
 
 #hackSpotsTable {cursor: pointer; margin-top: 80px;}
-#hackSpotsTable .tHeader {padding: 4px 8px; background: #FF7031;}
+#hackSpotsTable .tHeader:hover {color: #FF7031;}
 .spotRow:hover {color: #FF7031;}
  .spotRow {border-left: 3px solid #ff00ff;}
  .hideRow {display: none;}
