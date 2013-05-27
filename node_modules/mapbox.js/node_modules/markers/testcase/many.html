@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mmg: simple markers for Modest Maps</title>
+    <style>
+      #map {
+        position:absolute;
+        top:0;
+        right:0;
+        left:0;
+        bottom:0;
+      }
+      body {
+        font:13px/20px 'Helvetica';
+      }
+    </style>
+    <link href='ext/controls.css' type='text/css' rel='stylesheet' />
+  </head>
+  <body>
+    <div class='column'>
+      <div id='map'></div>
+    </div>
+    <script type='text/javascript' src='src/mmg.js'></script>
+    <script type='text/javascript' src='misc/chroma.min.js'></script>
+    <script type='text/javascript' src='src/simplestyle_factory.js'></script>
+    <script type='text/javascript' src='src/tooltip_wrap.js'></script>
+    <script type='text/javascript' src='lib/modestmaps.min.js'></script>
+    <script type='text/javascript' src='lib/wax.mm.min.js'></script>
+    <script type='text/javascript' src='ext/movetip.js'></script>
+    <script type='text/javascript'>
+      wax.tilejson('http://a.tiles.mapbox.com/v3/tmcw.map-5vaivzxq.jsonp',
+        function(tj) {
+          var m = new MM.Map('map', [
+              new wax.mm.connector(tj)
+              ]);
+          var step = 1;
+          var ft = [];
+          var colors = ['#fff', '#f00', '#ace', '#cae', '#fae', '#728'];
+          for (var x = -70; x < -20; x += step) {
+            for (var y = 30; y < 50; y += step) {
+              ft.push({
+                geometry: {
+                  coordinates: [x, y]
+                },
+                properties: {
+                  'marker-color': colors[y % colors.length],
+                  'marker-size': 'small'
+                }
+              });
+            }
+          }
+
+          var l = mmg()
+            .factory(simplestyle_factory)
+            .features(ft);
+          m.addLayer(l);
+          m.extent(l.extent());
+        });
+    </script>
+  </body>
+</html>

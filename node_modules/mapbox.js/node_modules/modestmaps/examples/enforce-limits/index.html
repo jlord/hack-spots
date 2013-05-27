@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Modest Maps JS</title>
+<script type="text/javascript" src="../../modestmaps.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+    var layer = new MM.TemplatedLayer("http://otile1.mqcdn.com/tiles/1.0.0/osm/{Z}/{X}/{Y}.png");
+    map = new MM.Map(document.body, layer)
+
+    var minZoom = 2;
+    var maxZoom = 10;
+    var topLeft = new MM.Location(51.4, -131.8);
+    var bottomRight = new MM.Location(21.5, -50.5);
+
+    // override map limits so that panning and zooming are constrained within these bounds:
+    map.coordLimits = [
+      map.locationCoordinate(topLeft).zoomTo(minZoom),
+      map.locationCoordinate(bottomRight).zoomTo(maxZoom)
+    ];
+
+    // override provider limits so that tiles are not loaded unless they are inside these bounds:
+    layer.provider.tileLimits = [
+      map.locationCoordinate(topLeft).zoomTo(minZoom),
+      map.locationCoordinate(bottomRight).zoomTo(maxZoom)
+   ];
+
+    map.setCenterZoom(new MM.Location(37.811530, -122.2666097), 5);
+}
+</script>
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+</style>
+</head>
+<body>
+</body>
+</html>

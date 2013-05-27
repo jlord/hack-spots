@@ -1,0 +1,65 @@
+body {font-family: Helvetica, Arial, sans-serif;}
+h1 {font-size: 600%;}
+/*.char2, .char3, .char4, .char5, .char6, .char7, .char8, .char9, .char10, .char11 {color: fff;}*/
+.char1, .char2, .char3, .char4, .char5, .char6, .char7, .char8, .char9, .char10 {
+    color: #fff; 
+    border-right: 6px solid transparent;    
+    -webkit-animation: typing .5s;
+    -webkit-animation-fill-mode: forwards;
+}
+.char10 {
+    color: #fff; 
+    padding-right: 2px;
+    border-right: .1em solid transparent;  
+    -webkit-animation: typing 1s infinite;
+}
+
+.char1 {
+    -webkit-animation-delay: .5s;
+}
+.char1::after {
+     -webkit-animation-delay: 1s;
+}
+.char2 {
+    -webkit-animation-delay: 1.5s;
+}
+.char3 {
+    -webkit-animation-delay: 2s;
+}
+.char4 {
+    -webkit-animation-delay: 2.5s;
+}
+.char5 {
+    -webkit-animation-delay: 3s;
+}
+.char6 {
+    -webkit-animation-delay: 3.5s;
+}
+.char7 {
+    -webkit-animation-delay: 4s;
+}
+.char8 {
+    -webkit-animation-delay: 4.5s;
+}
+.char9 {
+    -webkit-animation-delay: 5s;
+}
+.char10 {
+    -webkit-animation-delay: 5.5s;
+}
+.char11 {
+    -webkit-animation-delay: 6s;
+}
+
+@-webkit-keyframes typing {
+    from, to {color: #333; border-color: #07D6FF;   }
+/*    25% {border-color: transparent; }
+    75% {border-color: #07D6FF;}*/
+    to {color: #333; border-color: transparent;}
+}
+
+box.addEventListener( 'webkitTransitionEnd', 
+    function( event ) { alert( "Finished transition!" ); }, false );
+
+ 
+

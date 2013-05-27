@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mmg: simple markers for Modest Maps</title>
+    <link href='css/site.css' rel='stylesheet' type='text/css' />
+    <link href='src/mmg.css' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+    <div class='column'>
+      <h2>clustering</h2>
+      <div class='map' id='map'></div>
+      <label for='ten'>cluster size</label>
+      <button id='no'>no clustering</button>
+      <button id='ten'>10</button>
+      <button id='fifty'>50</button>
+      <button id='thou'>1000</button>
+      <p>k-means clustering, adapted from <a href='http://polymaps.org/ex/cluster.html'>the polymaps example and implementation</a>.</p>
+
+    </div>
+    <script type='text/javascript' src='src/mmg.js'></script>
+    <script type='text/javascript' src='bonus/kmeans.js'></script>
+    <script type='text/javascript' src='bonus/mmg_cluster.js'></script>
+    <script type='text/javascript' src='src/simplestyle_factory.js'></script>
+    <script type='text/javascript' src='lib/modestmaps.min.js'></script>
+    <script type='text/javascript' src='lib/wax.mm.min.js'></script>
+    <script type='text/javascript'>
+      var features = [];
+      for (var i = 0; i < 1000; i++) {
+          features.push({
+              type: 'Feature',
+              geometry: {
+                 type: 'Point',
+                 coordinates: [
+                 (Math.random() - 0.5) * 50,
+                 (Math.random() - 0.5) * 50]
+              }
+          });
+      }
+      var clusters, ml;
+      wax.tilejson('http://a.tiles.mapbox.com/v3/tmcw.map-5vaivzxq.jsonp',
+        function(tj) {
+          clusters = mmg_cluster(features);
+            ml = mmg()
+              .factory(simplestyle_factory)
+              .features(clusters);
+          var m = new MM.Map('map', [
+            new wax.mm.connector(tj), ml
+          ]);
+          m.extent(ml.extent());
+        });
+        document.getElementById('no').onclick = function() {
+            ml.features(features);
+        };
+        document.getElementById('ten').onclick = function() {
+            clusters = mmg_cluster(features, 10);
+            ml.features(clusters);
+        };
+        document.getElementById('fifty').onclick = function() {
+            clusters = mmg_cluster(features, 50);
+            ml.features(clusters);
+        };
+        document.getElementById('thou').onclick = function() {
+            clusters = mmg_cluster(features, 1000);
+            ml.features(clusters);
+        };
+    </script>
+  </body>
+</html>
