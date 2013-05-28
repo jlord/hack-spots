@@ -149,7 +149,7 @@
    //}) 
 
 	function highlightLastMarker(geoJSON, highlightColor) {
-		geoJSON.reverse()[0].properties["marker-color"] = highlightColor
+		geoJSON[0].properties["marker-color"] = highlightColor
 		return geoJSON
 	}
 
