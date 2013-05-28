@@ -1,5 +1,7 @@
 # Hi!
 
+![screenshot](https://raw.github.com/jlord/hack-spots/gh-pages/img/hackspotsss.png)
+
 This is the code for a website that shows the spots myself, my friends (or Twitter friends) have found to be excelent hacking spots around the whole wide world.
 
 ## But How?
