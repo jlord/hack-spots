@@ -4,22 +4,22 @@
 		<script type="text/javascript" src="js/ICanHaz.js"></script> 
 		<script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
 		<script src='js/jquery.js '></script>
-		<script type="text/javascript" src='js/d3.js'></script>
+		<script type="text/javascript" src='js/tabletop.js'></script>
 		<script type="text/javascript" src='js/sheetsee.js'></script>
 		<link rel="shortcut icon" href="https://raw.github.com/jlord/hack-spots/master/favico.png"/>
 
     <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' />
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>		
-		<link media="screen" rel="stylesheet" type="text/css" href="/css/style.css"> 
-		<link media="screen" rel="stylesheet" type="text/css" href="/css/site.css"> 
+		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
+		<link media="screen" rel="stylesheet" type="text/css" href="css/site.css"> 
 	</head>
 <body>
 	<div id="wrapper">
 		<h1>Hack Spots</h1>
 		<div>
 			<ul class="nav">
-				<li><strong>The collected favorites of those who hack<strong></li>
+				<li><strong>The collected favorites of those who hack</strong></li>
 				<li><a href="#info">INFO</a> -</li>
 				<li><a href="http://jlord.github.com/sheetsee.js" target="_blank">POWERED BY SHEETSEE.JS</a> -</li>
 				<li><a href="http://www.github.com/jlord/hack-spots" target="_blank">GITHUB</a> -</li>
@@ -102,6 +102,15 @@
 
 	<script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
+  	var gData
+  	var URL = "0Ao5u1U6KYND7dFVkcnJRNUtHWUNKamxoRGg4ZzNiT3c"
+		Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } ) 
+	}) 
+
+
+  function showInfo(data) {
+  	gData = data
+
   	Sheetsee.makeTable(gData, "#hackSpotsTable")
   	Sheetsee.initiateTableFilter(gData, "#tableFilter", "#hackSpotsTable")
 
@@ -137,7 +146,7 @@
 			var searchCoords = ""
 			// map.setView(viewCoords, zoomLevel)
 	  }
-   }) 
+   //}) 
 
 	function highlightLastMarker(geoJSON, highlightColor) {
 		geoJSON.reverse()[0].properties["marker-color"] = highlightColor
@@ -201,6 +210,7 @@
 	     	}
 	    })
  		}
+ 	}
 
 	</script>
 
