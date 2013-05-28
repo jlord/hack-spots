@@ -41,7 +41,7 @@ code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font
 .fauxButton .selected {background-color: #FF4646;}
 .colorText {color: #FF4646; text-transform: uppercase; font-weight: 700;}
 
- .leaflet-popup-content h2 {font-family: Lato; font-size: 20px; text-transform: uppercase;}
+ .leaflet-popup-content h2 {font-family: Lato; font-size: 14px; text-transform: uppercase;}
 
  #rightSide {height: 400px; max-width: 350px; width: 100%; float: right; padding-top: 5px;}
  #selectedSpot {display: none;}

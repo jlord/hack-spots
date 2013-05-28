@@ -118,25 +118,12 @@
 		  $('#selectedSpot').html(selectedSpot).css("display", "inline")
 		  var selectedCoords = [dataElement[0].lat, dataElement[0].long]
 		  console.log(selectedCoords)
-		  matchGeoJSONbyRowNumber(rowNumber, geoJSON, "#FF4646")
+		  matchGeoJSONbyRowNumber(rowNumber, geoJSON, gData, "#FF4646")
 		  console.log(geoJSON)
-		  Sheetsee.addMarkerLayer(geoJSON, map, 11)
+		  var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
+			addPopups(map, markerLayer)
 		  map.setView(selectedCoords, 13)
  		})
-
- 		function matchGeoJSONbyRowNumber(rowNumber, geoJSON, highlightColor) {
-	 		geoJSON.forEach(function (d) {
-	    	for (var key in d.opts) {
-	      	var value = d.opts[key].toString().toLowerCase()
-	   			if (key === 'rowNumber' && value.match(rowNumber.toString().toLowerCase())) {
-	     	    d.properties["marker-color"] = highlightColor
-	     	    return geoJSON
-	     		}
-	     		// else { console.log("no match") }
-	    	}
- 			})
- 		}
-
 
   	var theLatestSpot = gData.reverse()[0]
 	  var latestSpot = ich.latestSpot({
@@ -160,7 +147,6 @@
 	  var optionsJSON = ["name", "address", "city", "rowNumber"]
     var geoJSONnoHL = Sheetsee.createGeoJSON(gData, optionsJSON)
     var geoJSON = highlightLastMarker(geoJSONnoHL, "#FF4646")
-    console.log(geoJSON[0].properties)
     // geoJSON[0].properties["maker-color"] = "#E5FF1D"
 		var map = Sheetsee.loadMap("map")
 		Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
@@ -169,11 +155,29 @@
 
 		function addPopups(map, markerLayer) {
 		  markerLayer.on('click', function(e) {
+		  // 	e.layer.feature["marker-color"] = "#ff00ff"
+				// map.marker(geoJSON, map, 11).addTo(map)
+				$('.spotRow').removeClass("selectedRow")
+		  	var rowNumber = e.layer.feature.opts.rowNumber.toString()
+		  	$('#' + rowNumber).addClass("selectedRow")
+		  	matchGeoJSONbyRowNumber(rowNumber, geoJSON, gData, "#FF4646")
+		  	console.log(geoJSON)
+		  	var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
+				addPopups(map, markerLayer)
+		  	var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
+		  	console.log("rowNumber", rowNumber, "dataElement", dataElement)
+ 				var selectedSpot = ich.selectedSpot({
+			  	rows: dataElement
+		 	 	}) 
+		  	$('#latestSpot').css("display", "none")
+		  	$('#selectedSpot').html(selectedSpot).css("display", "inline")
 		    var feature = e.layer.feature
 		    var popupContent = '<h2>' + feature.opts.name + '</h2>'
-		    e.layer.bindPopup(popupContent,{closeButton: false,})
+		    e.layer.bindPopup(popupContent,{closeButton: true,})
 		  })
 		}
+    // .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
+
 		$('.resetMap').click(function() {
 			$('.spotRow').removeClass("selectedRow")
 			markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
@@ -181,10 +185,27 @@
 		  $('#selectedSpot').css("display", "none")
 		})
 
+		function matchGeoJSONbyRowNumber(rowNumber, geoJSON, gdata, highlightColor) {
+	 		geoJSON.forEach(function (d) {
+	 			if (d.properties["marker-color"] === highlightColor) {
+	 				var origColor = gData[0].hexcolor
+	 				d.properties["marker-color"] = origColor
+	 			}
+
+	    	for (var key in d.opts) {
+	      	var value = d.opts[key].toString().toLowerCase()
+	   			if (key === 'rowNumber' && value.match(rowNumber.toString().toLowerCase())) {
+	     	    d.properties["marker-color"] = highlightColor
+	     	    return geoJSON
+	     		}
+	     	}
+	    })
+ 		}
+
 	</script>
 
 	<script type="text/javascript">
-		console.log(gData)
+		// console.log(gData)
 	</script>
 </body>
 </html>
