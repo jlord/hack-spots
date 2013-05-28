@@ -1,55 +1,67 @@
 /* Page Specific CSS */
 
-body {font-family: Merriweather; background: #FFFEF8; color: #333; font-size: 16px; border: 10px #F1EFDE solid; margin: 0px; padding: 20px 20px 200px 20px; }
-h1, h2, h3, h4, h5, h6 {font-family: Amatic SC;}
-h1 {font-size: 40px;}
+body {font-family: Lato; background: #fff; color: #333; font-size: 16px; border: 52px #F8F8F8 solid; margin: 0px; padding: 20px 20px 200px 20px; }
+h1, h2, h3, h4, h5, h6 {}
+h1 {font-size: 80px; font-family: Amatic SC; font-weight: normal; margin: 0px;}
+h2 {font-size: 50px; font-family: Amatic SC; font-weight: normal; margin: 11px 0px;}
+h3 {font-family: Amatic SC; font-size: 30px; margin: 10px 0px;}
+h4 {font-size: Lato; font-size: 24px;}
 
-h3.functionH {/*background-color: #47CCFC; color: #fff;*/ padding: 4px 8px; margin-top: 52px; border-top: 3px solid #47CCFC; border-left: 3px solid #47CCFC; border-right: 3px solid #47CCFC; margin-left: -14px; padding-left: 14px;
-								padding-top: 9px; }
 img {width: 100%;} 
+.container {margin: 24px 0px;}
+#tableFilter {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; font-family: Merriweather; color: #333; font-size: 13px; height: 22px;}
 
-p a, a {color: #333; text-decoration: none; padding-bottom: 0px; border-bottom: 2px #FD9393 solid;}
-p a:visted {color: #ff00ff;}
+p a, a {color: #333; text-decoration: none; padding-bottom: 0px; border-bottom: 1px #FD9393 solid;}
 a:hover {color: #47CCFC;}
-a:visited {color: #333;}
-small {padding: 10px 0px;}
-p {line-height: 24px;}
+
+small {padding: 10px 0px; font-size: 10px;}
+p {margin: 0px; padding: 0px; font-size: 12px;}
+li {line-height: 19px; font-size: 12px;}
 ol {line-height: 24px;}
 a.button {border: none;}
 
-#map {height: 400px; max-width: 530px; background: #DADADA;}
+#map {height: 400px; max-width: 530px; min-width: 300px; background: #DADADA;}
 #map a {border: none;}
 
 
-::selection {background: #ff00ff;} /*#44FFB4*/
-::-moz-selection {background: #ff00ff;}
+::selection {background: #E5FF1D;} 
+::-moz-selection {background: #E5FF1D;}
 
-/*.goToTop {font-size: 9px; font-family: Helvetica; text-transform: uppercase; }*/
-
-#menu {/*background: #47CCFC;*/ color: #fff; padding: 20px; float: left; position: fixed; left: 40px; top: 40px; max-width: 300px; font-family: Helvetica; font-size: 14px;}
-#menu ul {list-style: none; margin: 0px; padding: 0px;}
-#menu li {line-height: 34px;}
-#menu li a {padding: 4px 8px; background-color: #F0F0F0; text-decoration: none; border: none;}
-#menu li a.a2 {background-color: #CCF4FF;}
-#menu li a:hover {background-color: #e7e7e7; color: #333;}
+ul.nav {list-style: none; margin: 0px; padding: 0px;}
+ul.nav li {display: inline; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding-right: 4px;}
+ul.nav li a {border: none;}
+ul.nav li a:hover {border-bottom: 1px #FD9393 solid;}
 
 #wrapper {margin: 0px auto; max-width: 900px; padding-top: 40px; /*margin-left: 250px;*/}
 pre {word-wrap: break-word; padding: 14px; background: #F0F0F0; }
 code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font-size: 13px; color: #636363; font-weight: normal;}
-.button {padding: 5px 4px; background-color: #FF7031; font-size: 10px; color: #fff;}
-.dotted {margin: 20px -28px; padding: 20px 28px; background-color: #CCF4FF; border: 8px solid #47CCFC; margin-top: 44px; padding-top: 0px;}
-.dotted li {padding: 0px 2px;}
-.dotted h2 {margin-top: inherit;}
+.button {padding: 5px 5px; background-color: #BEBEBE; font-size: 10px; color: #fff;}
+.button:hover {background: #B9FCFC; color: #47CCFC;}
+.fauxButton {padding: 5px 5px; background-color: #FF4646; font-size: 11px; color: #fff; display: inline;}
+.fauxButton .selected {background-color: #FF4646;}
+.colorText {color: #FF4646; text-transform: uppercase; font-weight: 700;}
 
- .leaflet-popup-content h2 {margin-bottom: 4px; margin-top: auto;}
+ .leaflet-popup-content h2 {font-family: Lato; font-size: 20px; text-transform: uppercase;}
 
- #latestSpot, #selectedSpot {height: 400px; max-width: 350px; width: 100%; float: right;}
+ #rightSide {height: 400px; max-width: 350px; width: 100%; float: right; padding-top: 5px;}
  #selectedSpot {display: none;}
- #latestSpot ul, #selectedSpot ul {list-style: none; margin: 0px; padding: 0px;}
- #latestSpot li, #selectedSpot li{line-height: 34px;}
+ #latestSpot ul, #selectedSpot ul {list-style: none; margin-top: 12px 0px; padding: 0px;}
+ #latestSpot li, #selectedSpot li{}
 
-#hackSpotsTable {cursor: pointer; margin-top: 80px;}
-#hackSpotsTable .tHeader:hover {color: #FF7031;}
-.spotRow:hover {color: #FF7031;}
- .spotRow {border-left: 3px solid #ff00ff;}
- .hideRow {display: none;}
+#hackSpotsTable {cursor: pointer; background: #fff; min-width: 600px;}
+.tHeader::after {content: " \2193 \2191 "; font-size: 10px; padding-left: 3px;}
+#hackSpotsTable .tHeader:hover {color: #FF4646;}
+.spotRow:hover {color: #FF4646;}
+.spotRow {border-left: 3px solid #ff00ff;}
+.hideRow {display: none;}
+.selectedRow {color: #FF4C0D;}
+
+ .category {text-transform: uppercase; font-size: 9px; letter-spacing: .2em; padding-right: 6px;}
+
+#info p {font-size: 14px; padding: 4px; line-height: 19px; font-weight: 300;}
+#info {border-top: 4px #F8F8F8 solid;}
+
+ @media (max-width: 1024px) {
+ 	body {border: 20px #F8F8F8 solid; margin: 0px; padding: 20px 20px 80px 20px; }
+
+ }

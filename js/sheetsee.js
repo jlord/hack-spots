@@ -88,13 +88,30 @@ function makeTable(data, targetDiv) {
 //
 // // // // // // // // // // // // // // // // // // // // // // // //  // //
 
-function getGroupCount(data, groupTerm) {
+function getKeywordCount(data, keyword) {
+  console.log(data, keyword)
   var group = []
   data.forEach(function (d) {
-    if (d.status.match(groupTerm)) group.push(d)
+    for(var key in d) {
+      var value = d[key].toString().toLowerCase()
+      if (value.match(keyword.toLowerCase())) group.push(d)
+    } 
   })
   return group.length
   if (group = []) return "0" 
+}
+
+function getKeyword(data, keyword) {
+  console.log(data, keyword)
+  var group = []
+  data.forEach(function (d) {
+    for(var key in d) {
+      var value = d[key].toString().toLowerCase()
+      if (value.match(keyword.toLowerCase())) group.push(d)
+    } 
+  })
+  return group
+  if (group = []) return "null" 
 }
 
 function getColumnTotal(data, column){
@@ -741,7 +758,8 @@ exports.mostFrequent = mostFrequent
 exports.addUnitsLabels = addUnitsLabels
 exports.getOccurance = getOccurance
 exports.getMatches = getMatches
-exports.getGroupCount = getGroupCount
+exports.getKeyword = getKeyword
+exports.getKeywordCount = getKeywordCount
 exports.getColumnTotal = getColumnTotal
 exports.getMax = getMax
 exports.getMin = getMin
