@@ -1,18 +1,19 @@
 <html>
 	<head>
 		<title>Hack Spots</title>
-		<script type="text/javascript" src="js/ICanHaz.js"></script> 
+		<script type="text/javascript" src="js/ICanHaz.js"></script>
 		<script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
 		<script src='js/jquery.js '></script>
 		<script type="text/javascript" src='js/tabletop.js'></script>
 		<script type="text/javascript" src='js/sheetsee.js'></script>
+		<script type="text/javascript" src='js/site.js'></script>
 		<link rel="shortcut icon" href="https://raw.github.com/jlord/hack-spots/master/favico.png"/>
 
     <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' />
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>		
-		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> 
-		<link media="screen" rel="stylesheet" type="text/css" href="css/site.css"> 
+		<link href='http://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+		<link media="screen" rel="stylesheet" type="text/css" href="css/style.css">
+		<link media="screen" rel="stylesheet" type="text/css" href="css/site.css">
 	</head>
 <body>
 	<div id="wrapper">
@@ -103,119 +104,39 @@
 	<script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
   	var gData
+		// tabletop, go get the datas!
   	var URL = "0Ao5u1U6KYND7dFVkcnJRNUtHWUNKamxoRGg4ZzNiT3c"
-		Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } ) 
-	}) 
+		Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+	})
 
 
   function showInfo(data) {
-  	gData = data
+		// additional site specfic functions are in site.js
 
+  	gData = data
+		// make a table and a table filter
   	Sheetsee.makeTable(gData, "#hackSpotsTable")
   	Sheetsee.initiateTableFilter(gData, "#tableFilter", "#hackSpotsTable")
 
-  	$('.spotRow').live("click", function(event) {
-  		$('.spotRow').removeClass("selectedRow")
-  		console.log("clicked!")
- 			var rowNumber = $(this).closest("tr").attr("id")
- 			$('#' + rowNumber).addClass("selectedRow")
- 			var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
- 			var selectedSpot = ich.selectedSpot({
-			  rows: dataElement
-		  })
-		  $('#latestSpot').css("display", "none")
-		  $('#selectedSpot').html(selectedSpot).css("display", "inline")
-		  var selectedCoords = [dataElement[0].lat, dataElement[0].long]
-		  console.log(selectedCoords)
-		  matchGeoJSONbyRowNumber(rowNumber, geoJSON, gData, "#FF4646")
-		  console.log(geoJSON)
-		  var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
-			addPopups(map, markerLayer)
-		  map.setView(selectedCoords, 13)
- 		})
-
+		// on start, display the latest spot to be added
   	var theLatestSpot = gData.reverse()[0]
-	  var latestSpot = ich.latestSpot({
-		   rows: theLatestSpot
-	  })
+		// use icanhas to generate the contents for the div
+	  var latestSpot = ich.latestSpot({ rows: theLatestSpot })
+		// write it to the div!
 	  $('#latestSpot').html(latestSpot)
 
-	  function refocusMap(){
-	  	var searchTerm = $('#tableFilter').val()
-	  	var searchData = Sheetsee.getKeyword(gData, searchTerm)
-			var searchCoords = ""
-			// map.setView(viewCoords, zoomLevel)
-	  }
-   //}) 
-
-	function highlightLastMarker(geoJSON, highlightColor) {
-		geoJSON[0].properties["marker-color"] = highlightColor
-		return geoJSON
-	}
-
+		// create the geoJSON with these added properties
 	  var optionsJSON = ["name", "address", "city", "rowNumber"]
     var geoJSONnoHL = Sheetsee.createGeoJSON(gData, optionsJSON)
     var geoJSON = highlightLastMarker(geoJSONnoHL, "#FF4646")
-    // geoJSON[0].properties["maker-color"] = "#E5FF1D"
+		// make map, add tiles, markers, popups
 		var map = Sheetsee.loadMap("map")
 		Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
 		var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
 		addPopups(map, markerLayer)
-
-		function addPopups(map, markerLayer) {
-		  markerLayer.on('click', function(e) {
-		  // 	e.layer.feature["marker-color"] = "#ff00ff"
-				// map.marker(geoJSON, map, 11).addTo(map)
-				$('.spotRow').removeClass("selectedRow")
-		  	var rowNumber = e.layer.feature.opts.rowNumber.toString()
-		  	$('#' + rowNumber).addClass("selectedRow")
-		  	matchGeoJSONbyRowNumber(rowNumber, geoJSON, gData, "#FF4646")
-		  	console.log(geoJSON)
-		  	var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
-				addPopups(map, markerLayer)
-		  	var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
-		  	console.log("rowNumber", rowNumber, "dataElement", dataElement)
- 				var selectedSpot = ich.selectedSpot({
-			  	rows: dataElement
-		 	 	}) 
-		  	$('#latestSpot').css("display", "none")
-		  	$('#selectedSpot').html(selectedSpot).css("display", "inline")
-		    var feature = e.layer.feature
-		    var popupContent = '<h2>' + feature.opts.name + '</h2>'
-		    e.layer.bindPopup(popupContent,{closeButton: true,})
-		  })
-		}
-    // .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
-
-		$('.resetMap').click(function() {
-			$('.spotRow').removeClass("selectedRow")
-			markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 11)
-			$('#latestSpot').css("display", "inline")
-		  $('#selectedSpot').css("display", "none")
-		})
-
-		function matchGeoJSONbyRowNumber(rowNumber, geoJSON, gdata, highlightColor) {
-	 		geoJSON.forEach(function (d) {
-	 			if (d.properties["marker-color"] === highlightColor) {
-	 				var origColor = gData[0].hexcolor
-	 				d.properties["marker-color"] = origColor
-	 			}
-
-	    	for (var key in d.opts) {
-	      	var value = d.opts[key].toString().toLowerCase()
-	   			if (key === 'rowNumber' && value.match(rowNumber.toString().toLowerCase())) {
-	     	    d.properties["marker-color"] = highlightColor
-	     	    return geoJSON
-	     		}
-	     	}
-	    })
- 		}
- 	}
+	}
 
 	</script>
 
-	<script type="text/javascript">
-		// console.log(gData)
-	</script>
 </body>
 </html>
