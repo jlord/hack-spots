@@ -66,3 +66,7 @@ code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font
  	body {border: 20px #F8F8F8 solid; margin: 0px; padding: 20px 20px 80px 20px; }
 
  }
+
+ @media (max-width: 480px) {
+ 	#wrapper {max-width: 460px; padding-top: 20px;}
+ }
