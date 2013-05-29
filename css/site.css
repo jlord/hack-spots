@@ -64,9 +64,11 @@ code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font
 
  @media (max-width: 1024px) {
  	body {border: 20px #F8F8F8 solid; margin: 0px; padding: 20px 20px 80px 20px; }
+ 	#rightSide {padding-left: 24px; max-width: 243px;}
 
  }
 
  @media (max-width: 480px) {
  	#wrapper {max-width: 460px; padding-top: 20px;}
+ 	#hackSpotsTable, #map {min-width: 224px;}
  }
