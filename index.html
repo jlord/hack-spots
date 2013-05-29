@@ -151,7 +151,7 @@
    //}) 
 
 	function highlightLastMarker(geoJSON, highlightColor) {
-		geoJSON.reverse()[0].properties["marker-color"] = highlightColor
+		geoJSON[0].properties["marker-color"] = highlightColor
 		return geoJSON
 	}
 
@@ -184,7 +184,7 @@
 		  	$('#selectedSpot').html(selectedSpot).css("display", "inline")
 		    var feature = e.layer.feature
 		    var popupContent = '<h2>' + feature.opts.name + '</h2>'
-		    e.layer.bindPopup(popupContent,{closeButton: true,})
+		    e.layer.bindPopup(popupContent,{closeButton: false,})
 		  })
 		}
     // .addControl(L.mapbox.geocoderControl('examples.map-vyofok3q'));
