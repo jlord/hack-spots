@@ -111,7 +111,7 @@ function getKeyword(data, keyword) {
     } 
   })
   return group
-  if (group = []) return "null" 
+  if (group = []) return "no matches" 
 }
 
 function getColumnTotal(data, column){
