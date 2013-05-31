@@ -8,21 +8,22 @@ h3 {font-family: Amatic SC; font-size: 30px; margin: 10px 0px;}
 h4 {font-size: Lato; font-size: 24px;}
 
 img {width: 100%;} 
-.container {margin: 24px 0px;}
-#tableFilter {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; font-family: Merriweather; color: #333; font-size: 13px; height: 22px;}
-
 p a, a {color: #333; text-decoration: none; padding-bottom: 0px; border-bottom: 1px #FD9393 solid;}
 a:hover {color: #47CCFC;}
-
 small {padding: 10px 0px; font-size: 10px;}
 p {margin: 0px; padding: 0px; font-size: 12px;}
 li {line-height: 19px; font-size: 12px;}
 ol {line-height: 24px;}
 a.button {border: none;}
 
+pre {word-wrap: break-word; padding: 14px; background: #F0F0F0; }
+code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font-size: 13px; color: #636363; font-weight: normal;}
+
 #map {height: 400px; max-width: 530px; min-width: 300px; background: #DADADA;}
 #map a {border: none;}
 
+.container {margin: 24px 0px;}
+#tableFilter {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; font-family: Merriweather; color: #333; font-size: 13px; height: 22px;}
 
 ::selection {background: #E5FF1D;} 
 ::-moz-selection {background: #E5FF1D;}
@@ -33,40 +34,40 @@ ul.nav li a {border: none;}
 ul.nav li a:hover {border-bottom: 1px #FD9393 solid;}
 
 #wrapper {margin: 0px auto; max-width: 900px; padding-top: 40px; /*margin-left: 250px;*/}
-pre {word-wrap: break-word; padding: 14px; background: #F0F0F0; }
-code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font-size: 13px; color: #636363; font-weight: normal;}
+
 .button {padding: 5px 5px; background-color: #BEBEBE; font-size: 10px; color: #fff;}
 .button:hover {background: #B9FCFC; color: #47CCFC;}
 .fauxButton {padding: 5px 5px; background-color: #FF4646; font-size: 11px; color: #fff; display: inline;}
 .fauxButton .selected {background-color: #FF4646;}
 .colorText {color: #FF4646; text-transform: uppercase; font-weight: 700;}
 
- .leaflet-popup-content h2 {font-family: Lato; font-size: 14px; text-transform: uppercase;}
+.leaflet-popup-content h2 {font-family: Lato; font-size: 14px; text-transform: uppercase;}
 
- #rightSide {height: 400px; max-width: 350px; width: 100%; float: right; padding-top: 5px;}
- #selectedSpot {display: none;}
- #latestSpot ul, #selectedSpot ul {list-style: none; margin-top: 12px 0px; padding: 0px;}
- #latestSpot li, #selectedSpot li{}
+#rightSide {height: 400px; max-width: 350px; width: 100%; float: right; padding-top: 5px;}
+#selectedSpot {display: none;}
+#latestSpot ul, #selectedSpot ul {list-style: none; margin-top: 12px 0px; padding: 0px;}
+.category {text-transform: uppercase; font-size: 9px; letter-spacing: .2em; padding-right: 6px;}
+
+#info p {font-size: 14px; padding: 4px; line-height: 19px; font-weight: 300;}
+#info {border-top: 4px #F8F8F8 solid;}
 
 #hackSpotsTable {cursor: pointer; background: #fff; min-width: 300px; overflow-x: auto; padding-bottom: 20px;}
-#hackSpotsTable table {min-width: 600px;}
-.tHeader::after {content: " \2193 \2191 "; font-size: 10px; padding-left: 3px;}
+#hackSpotsTable table {min-width: 650px;}
 #hackSpotsTable .tHeader:hover {color: #FF4646;}
+.tHeader::after {content: " \2193 \2191 "; font-size: 10px; padding-left: 3px;}
 .spotRow:hover {color: #FF4646;}
 .spotRow {border-left: 3px solid #ff00ff;}
 .hideRow {display: none;}
 .selectedRow {color: #FF4C0D;}
 
- .category {text-transform: uppercase; font-size: 9px; letter-spacing: .2em; padding-right: 6px;}
 
-#info p {font-size: 14px; padding: 4px; line-height: 19px; font-weight: 300;}
-#info {border-top: 4px #F8F8F8 solid;}
 
- @media (max-width: 1024px) {
- 	body {border: 20px #F8F8F8 solid; margin: 0px; padding: 20px 20px 80px 20px; }
- 	#rightSide {padding-left: 24px; max-width: 243px;}
+@media (max-width: 1024px) {
+	body {border: 20px #F8F8F8 solid; margin: 0px; padding: 20px 20px 80px 20px; }
+	#rightSide {max-width: 100%; float: left;}
+	#map {max-width: 100%;}
 
- }
+}
 
  @media (max-width: 480px) {
  	#wrapper {max-width: 460px; padding-top: 20px;}
