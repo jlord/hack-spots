@@ -143,7 +143,20 @@
 		  map.setView(selectedCoords, 13)
  		})
 
-  	var theLatestSpot = gData.reverse()[0]
+  	// so that the first map and info that loads
+  	// is complete and doesn't show rows that are
+  	// actively being edited by folk
+  	function findLatestCompleteSpot(data) {
+  		var latestCompleteSpot = []
+  		var startWithLatestRow = data.reverse()
+  		startWithLatestRow.forEach(function(row){
+  			if (!row.lat || !row.long || !row.name || !row.address || !row.city || !row.state ) return
+  			else latestCompleteSpot.push(row) 
+  		})
+  		return latestCompleteSpot[0]
+  	}
+
+  	var theLatestSpot = findLatestCompleteSpot(gData)
 	  var latestSpot = ich.latestSpot({
 		   rows: theLatestSpot
 	  })
