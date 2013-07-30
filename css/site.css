@@ -50,8 +50,8 @@ ul.nav li a:hover {border-bottom: 1px #FD9393 solid;}
 #info p {font-size: 14px; padding: 4px; line-height: 19px; font-weight: 300;}
 #info {border-top: 4px #F8F8F8 solid;}
 
-#hackSpotsTable {cursor: pointer; background: #fff; min-width: 300px; overflow-x: auto; padding-bottom: 20px;}
-#hackSpotsTable table {min-width: 650px;}
+#hackSpotsTable {cursor: pointer; background: #fff; overflow-x: auto; padding-bottom: 20px;}
+#hackSpotsTable table {min-width: 900px;}
 #hackSpotsTable .tHeader:hover {color: #FF4646;}
 .tHeader::after {content: " \2193 \2191 "; font-size: 10px; padding-left: 3px;}
 .spotRow:hover {color: #FF4646;}
