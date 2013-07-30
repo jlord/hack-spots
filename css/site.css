@@ -60,7 +60,6 @@ ul.nav li a:hover {border-bottom: 1px #FD9393 solid;}
 .selectedRow {color: #FF4C0D;}
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) and (max-width: 1024px) {
-  body {background: #ff00ff;}
   body {border: 20px #F8F8F8 solid; margin: 0px; padding: 20px 20px 80px 20px;}
   #tableFilter, .clear, .resetMap {display: none;}
   #wrapper {max-width: 460px; padding-top: 20px;}
