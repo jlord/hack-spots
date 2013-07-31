@@ -42,6 +42,7 @@
 		</div>
 		<div id="info" class="container">
 			<h3>Contribute!</h3>
+			<div id="theNumberofSpots"></div>
 			<p>This website is hooked up to <a href="https://docs.google.com/spreadsheet/ccc?key=0Ao5u1U6KYND7dFVkcnJRNUtHWUNKamxoRGg4ZzNiT3c#gid=0" target="_blank">this Google Spreadsheet</a>, which I've shared, so click and add your favorite hack spots to the bottom of the list! For the map you'll need to <strong>get the lat and long</strong> of the spot, you can get that <a href="http://www.latlong.net/" target="_blank">here</a>. The locating of these places is helpful, so please try to fill out all the columns.</p> 
 
 			<h3>Info</h3>
@@ -85,24 +86,28 @@
 		  {{/rows}}
 	</script>
 
+	<script id="theNumberofSpots" type="text/html">
+		<p><strong><span class="red-text">{{numberOfSpots}}</span> hack spots strong!</p>
+	</script>
+
 	<script id="selectedSpot" type="text/html">
-			{{#rows}}
-				<h4 class="fauxButton">SELECTED SPOT</h4>
-				<h2>{{name}}</h2>
-				<p class="colorText">{{address}}, {{city}}, {{state}}
-				<ul>
-			  	<li><span class="category">Wifi:</span> {{wifipassword}}</li>
-			  	<li><span class="category">Outlets:</span> {{outlets}}</li>
-			  	<li><span class="category">Couch:</span> {{couch}}</li>
-			  	<li><span class="category">Large Table:</span> {{largetable}}</li>
-			  	<li><span class="category">Outdoor Seating:</span> {{outdoorseating}}</li>
-			  	<li><span class="category">Brewing:</span> {{brewing}}</li>
-		  	</ul>
-		  	<ul>
-		  		<li><a href="https://maps.google.com/maps?q={{address}},{{city}},{{state}}" target="_blank">View in Google Maps</a></li>
-		  		<li><a href="http://www.yelp.com/search?find_desc={{name}},{{city}},{{state}}" target="_blank">Find on Yelp</a></li>
-		  	</ul>
-		  {{/rows}}
+		{{#rows}}
+			<h4 class="fauxButton">SELECTED SPOT</h4>
+			<h2>{{name}}</h2>
+			<p class="colorText">{{address}}, {{city}}, {{state}}
+			<ul>
+		  	<li><span class="category">Wifi:</span> {{wifipassword}}</li>
+		  	<li><span class="category">Outlets:</span> {{outlets}}</li>
+		  	<li><span class="category">Couch:</span> {{couch}}</li>
+		  	<li><span class="category">Large Table:</span> {{largetable}}</li>
+		  	<li><span class="category">Outdoor Seating:</span> {{outdoorseating}}</li>
+		  	<li><span class="category">Brewing:</span> {{brewing}}</li>
+	  	</ul>
+	  	<ul>
+	  		<li><a href="https://maps.google.com/maps?q={{address}},{{city}},{{state}}" target="_blank">View in Google Maps</a></li>
+	  		<li><a href="http://www.yelp.com/search?find_desc={{name}},{{city}},{{state}}" target="_blank">Find on Yelp</a></li>
+	  	</ul>
+	  {{/rows}}
 	</script>
 
 	<script type="text/javascript">
@@ -211,6 +216,12 @@
 			$('#latestSpot').css("display", "inline")
 		  $('#selectedSpot').css("display", "none")
 		})
+
+		var numberOfSpots = gData.length
+		var theNumberofSpots = ich.theNumberofSpots({
+	  	numberOfSpots: numberOfSpots
+ 	 	})
+		$('#theNumberofSpots').html(theNumberofSpots)
 
 		function matchGeoJSONbyRowNumber(rowNumber, geoJSON, gdata, highlightColor) {
 	 		geoJSON.forEach(function (d) {
