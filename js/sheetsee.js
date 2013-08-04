@@ -7,8 +7,7 @@ function exportFunctions(exports) {
 // // // // // // // // // // // // // // // // // // // // // // // //  // //
 
 function initiateTableFilter(data, filterDiv, tableDiv) {
-  $('.clear').on("click", function() { 
-    console.log(this)
+  $('.clear').on("click", function() {
     $(this.id + ".noMatches").css("visibility", "hidden")
     $(this.id + filterDiv).val("")
     makeTable(data, tableDiv)
@@ -23,16 +22,15 @@ function searchTable(data, searchTerm, tableDiv) {
   var filteredList = []
   data.forEach(function(object) {
     var stringObject = JSON.stringify(object).toLowerCase()
-    if (stringObject.match(searchTerm)) filteredList.push(object)
+    if (stringObject.match(searchTerm.toLowerCase())) filteredList.push(object)
   })
-  // if ($('#tableFilter').val("")) makeTable(data, tableDiv)
   if (filteredList.length === 0) {
     console.log("no matchie")
     $(".noMatches").css("visibility", "inherit")
     makeTable("no matches", tableDiv)
   }
   else $(".noMatches").css("visibility", "hidden")
-  makeTable(filteredList, tableDiv) 
+  makeTable(filteredList, tableDiv)
   return filteredList
 }
 
@@ -44,7 +42,7 @@ function sortThings(data, sorter, sorted, tableDiv) {
   })
   if (sorted === "descending") data.reverse()
   makeTable(data, tableDiv)
-  var header 
+  var header
   $(tableDiv + " .tHeader").each(function(i, el){
     var contents = resolveDataTitle($(el).text())
     if (contents === sorter) header = el
@@ -60,8 +58,6 @@ function resolveDataTitle(string) {
 function sendToSort(event) {
   var tableDiv = "#" + $(event.target).closest("div").attr("id")
   console.log("came from this table",tableDiv)
-  // var dataset = $(tableDiv).attr('dataset')
-  // console.log("made with this data", dataset, typeof dataset)
   var sorted = $(event.target).attr("data-sorted")
   if (sorted) {
     if (sorted === "descending") sorted = "ascending"
@@ -89,36 +85,34 @@ function makeTable(data, targetDiv) {
 // // // // // // // // // // // // // // // // // // // // // // // //  // //
 
 function getKeywordCount(data, keyword) {
-  console.log(data, keyword)
   var group = []
   data.forEach(function (d) {
     for(var key in d) {
       var value = d[key].toString().toLowerCase()
       if (value.match(keyword.toLowerCase())) group.push(d)
-    } 
+    }
   })
   return group.length
-  if (group = []) return "0" 
+  if (group = []) return "0"
 }
 
 function getKeyword(data, keyword) {
-  console.log(data, keyword)
   var group = []
   data.forEach(function (d) {
     for(var key in d) {
       var value = d[key].toString().toLowerCase()
       if (value.match(keyword.toLowerCase())) group.push(d)
-    } 
+    }
   })
   return group
-  if (group = []) return "no matches" 
+  if (group = []) return "no matches"
 }
 
 function getColumnTotal(data, column){
   var total = []
   data.forEach(function (d) {
-    if (d[column] === "") return 
-    total.push(+d[column]) 
+    if (d[column] === "") return
+    total.push(+d[column])
   })
   return total.reduce(function(a,b) {
     return a + b
@@ -139,7 +133,7 @@ function getMax(data, column){
         if (element[column].valueOf() > result[0][column].valueOf()) {
           result.length = 0
           return result.push(element)
-        }   
+        }
         if (element[column].valueOf() === result[0][column].valueOf()) {
           return result.push(element)
         }
@@ -156,7 +150,7 @@ function getMin(data, column){
         if (element[column].valueOf() < result[0][column].valueOf()) {
           result.length = 0
           return result.push(element)
-        }   
+        }
         if (element[column].valueOf() === result[0][column].valueOf()) {
           return result.push(element)
         }
@@ -169,14 +163,8 @@ function getMin(data, column){
 function getMatches(data, filter, category) {
   var matches = []
   data.forEach(function (element) {
-    if (category === 'rowNumber') {
-      var projectType = element[category].toString()
-      if (projectType === filter) matches.push(element)
-    }
-    else {
-      var projectType = element[category].toLowerCase()
-      if (projectType === filter.toLowerCase()) matches.push(element)
-    }
+    var projectType = element[category].toLowerCase()
+    if (projectType === filter.toLowerCase()) matches.push(element)
   })
   return matches
 }
@@ -244,32 +232,31 @@ function makeColorArrayOfObject(data, colors) {
   var keys = Object.keys(data)
   var counter = 1
   var colorIndex
-  return keys.map(function(key){ 
+  return keys.map(function(key){
     if (keys.length > colors.length || keys.length <= colors.length ) {
       colorIndex = counter % colors.length
     }
-    var h = {label: key, units: data[key], hexcolor: colors[colorIndex]} 
-    counter++  
-    colorIndex = counter 
+    var h = {label: key, units: data[key], hexcolor: colors[colorIndex]}
+    counter++
+    colorIndex = counter
     return h
   })
 }
 
-
 function makeArrayOfObject(data) {
   var keys = Object.keys(data)
-  return keys.map(function(key){ 
-    // var h = {label: key, units: data[key], hexcolor: "#FDBDBD"}  
-    var h = {label: key, units: data[key]}        
+  return keys.map(function(key){
+    // var h = {label: key, units: data[key], hexcolor: "#FDBDBD"}
+    var h = {label: key, units: data[key]}
     return h
   })
 }
 
 // // // // // // // // // // // // // // // // // // // // // // //  // //
-// 
+//
 // // // // Mapbox + Leaflet Map
 //
-// // // // // // // // // // // // // // // // // // // // // // // // //  
+// // // // // // // // // // // // // // // // // // // // // // // // //
 
 function buildOptionObject(optionsJSON, lineItem) {
   var newObj = {}
@@ -317,7 +304,7 @@ function addTileLayer(map, tileLayer) {
   layer.addTo(map)
 }
 
-function addMarkerLayer(geoJSON, map, zoomLevel) { 
+function addMarkerLayer(geoJSON, map, zoomLevel) {
   var viewCoords = [geoJSON[0].geometry.coordinates[1], geoJSON[0].geometry.coordinates[0]]
   var markerLayer = L.mapbox.markerLayer(geoJSON)
   markerLayer.setGeoJSON(geoJSON)
@@ -340,10 +327,10 @@ function addMarkerLayer(geoJSON, map, zoomLevel) {
 // }
 
 // // // // // // // // // // // // // // // // // // // // // // //  // //
-// 
+//
 // // // // // D3 Charts
 //
-// // // // // // // // // // // // // // // // // // // // // // // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // //
 
 // Bar Chart
 // Adapted mostly from http://bl.ocks.org/mbostock/3885705
@@ -457,24 +444,6 @@ function d3BarChart(data, options) {
       if (options.xaxis) return options.xaxis
       return
     })
-
-  d3.select("input").on("change", change)
-
-  function change() {
-    // Copy-on-write since in betweens are evaluated after a delay.
-    var y0 = y.domain(data.sort(this.checked
-        ? function(a, b) { return b.units - a.units }
-        : function(a, b) { return d3.ascending(a.label, b.label) })
-        .map(function(d) { return d.label }))
-        .copy()
-
-    var transition = svg.transition().duration(750),
-        delay = function(d, i) { return i * 50 }
-
-    transition.selectAll(".bar")
-        .delay(delay)
-        .attr("transform", function(d) { return "translate(0," + y(d.label) + ")" })
-  }
 }
 
 // Pie Chart
@@ -557,54 +526,13 @@ function mouseOut(d) {
       .style("fill", function(d) { return d.data.hexcolor})
       .attr("fill", function(d) { return d.data.hexcolor})
 
-//   g.append("text")
-//       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")" })
-//       .attr("dy", ".35em")
-//       .attr("dx", ".35em")
-//       .attr("class", "pieTip")
-//       .style("text-anchor", "middle")
-//       .text(function(d) { return d.data.units })
-
-// var labelr = radius + 8 // radius for label anchor
-//   g.append("text")
-//     .attr("transform", function(d) {
-//         var c = arc.centroid(d),
-//             x = c[0],
-//             y = c[1],
-//             // pythagorean theorem for hypotenuse
-//             h = Math.sqrt(x*x + y*y)
-//         return "translate(" + (x/h * labelr) +  ',' +
-//            (y/h * labelr) +  ")"
-//     })
-//     .attr("dy", ".35em")
-//     .attr("fill", "#333")
-//     .attr("class", "pieTip")
-//     .attr("text-anchor", function(d) {
-//         // are we past the center?
-//         return (d.endAngle + d.startAngle)/2 > Math.PI ?
-//             "end" : "start"
-//     })
-//     .text(function(d) { return d.data.units })
-
-    // svg.selectAll("rect")    
-    //   .data(data)         
-    //   .enter().append("g")
-    //     .append("rect")                               
-    //     .attr("width", 100)
-    //     .attr("height", 26) 
-    //     .attr("fill", function(d) { return d.hexcolor }) 
-    //     .attr("x", 0)
-    //     .attr("y", "-140px") // Controls padding to place text above bars
-
-
-
 svg.selectAll("g.labels")
   .data(data)
   .enter().append("g") // Append legend elements
       .append("text")
         .attr("text-anchor", "start")
         .attr("x", width / 2.5)
-        .attr("y", function(d, i) { return data.length + i*(data.length * 2)})
+        .attr("y", function(d, i) { return (height / 2) - i*(data.length * 20)})
         .attr("dx", 0)
         .attr("dy", "-140px") // Controls padding to place text above bars
         .text(function(d) { return d.label + ", " + d.units})
@@ -613,49 +541,14 @@ svg.selectAll("g.labels")
         .attr("class", function(d, i) { return "labels-" + "index-" + i + " aLabel "})
         .on('mouseover', mouseOver)
         .on("mouseout", mouseOut)
-
-  d3.select("input").on("change", change)
-
-  function change() {
-    console.log("checked/unchecked")
-    // Copy-on-write since in betweens are evaluated after a delay.
-    // pie.sort(function(a, b) { return b.units - a.units })
-    path = path.data(pie(data).sort(function(a, b) { return b.units - a.units; })); // update the data
-    path.attr("d", arc)
-   // path.transition().duration(750).attrTween("d", arcTween)
-
-  // var pie = d3.layout.pie()
-  //     .sort(null)
-  //     .value(function(d) { return d.units })
-
-//   function change() {
-//   clearTimeout(timeout);
-//   path = path.data(pie(dataset[this.value])); // update the data
-//   path.attr("d", arc); // redraw the arcs
-// }
-
-function arcTween(a) {
-  var i = d3.interpolate(this._current, a);
-  this._current = i(0);
-  return function(t) {
-    return arc(i(t));
-  };
 }
-    var transition = svg.transition().duration(750),
-        delay = function(d, i) { return i * 50 }
-
-    transition.selectAll(".path")
-        .delay(delay)
-  }
-}
-
 
 // Line Chart
 
 function d3LineChart(data, options){
     // Adapted from http://bl.ocks.org/1166403 and
     // http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
-    
+
     var m = options.m
     var w = options.w - m[1] - m[3]
     var h = options.h - m[0] - m[2]
@@ -676,8 +569,8 @@ function d3LineChart(data, options){
         .append("svg:g")
           .attr("transform", "translate(" + m[3] + "," + m[0] + ")")
 
-    var div = d3.select(options.div).append("div")   
-        .attr("class", "tooltip")               
+    var div = d3.select(options.div).append("div")
+        .attr("class", "tooltip")
         .style("opacity", 0)
 
     // create yAxis
@@ -711,7 +604,7 @@ function d3LineChart(data, options){
             if (options.yaxis) return options.yaxis
             return
           })
-      
+
    var lineData = data.map(function(d) { return d.units })
       graph.append("svg:path")
           .attr("d", line(lineData))
@@ -719,21 +612,21 @@ function d3LineChart(data, options){
           .attr("index_value", function(d, i) { return i })
           // .attr("stroke", options.hiColor).attr("fill", "none")
 
-    graph.selectAll("dot")    
-        .data(data)         
-    .enter().append("circle")                               
-        .attr("r", 3.5) 
-        .attr("fill", options.hiColor)      
-        .attr("cx", function(d) { return x(d.label); })       
-        .attr("cy", function(d) { return y(d.units); })     
-        .on("mouseover", function(d) {      
-            div.transition().duration(200).style("opacity", .9)    
-            div .html(d.label + ", "  + d.units)  
-                .style("left", (d3.event.pageX) + "px")     
-                .style("top", (d3.event.pageY - 28) + "px")   
-            })                  
-        .on("mouseout", function(d) {       
-            div.transition().duration(500).style("opacity", 0) 
+    graph.selectAll("dot")
+        .data(data)
+    .enter().append("circle")
+        .attr("r", 3.5)
+        .attr("fill", options.hiColor)
+        .attr("cx", function(d) { return x(d.label); })
+        .attr("cy", function(d) { return y(d.units); })
+        .on("mouseover", function(d) {
+            div.transition().duration(200).style("opacity", .9)
+            div .html(d.label + ", "  + d.units)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+            })
+        .on("mouseout", function(d) {
+            div.transition().duration(500).style("opacity", 0)
         })
 }
 // tables
