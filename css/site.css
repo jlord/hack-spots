@@ -4,7 +4,7 @@ body {font-family: Lato; background: #fff; color: #333; font-size: 16px; border:
 h1 {font-size: 80px; font-family: Amatic SC; font-weight: normal; margin: 0px;}
 h2 {font-size: 50px; font-family: Amatic SC; font-weight: normal; margin: 11px 0px;}
 h3 {font-family: Amatic SC; font-size: 30px; margin: 10px 0px;}
-h4 {font-size: Lato; font-size: 24px;}
+h4 {font-family: Lato; font-size: 24px;}
 
 img {width: 100%;} 
 p a, a {color: #333; text-decoration: none; padding-bottom: 0px; border-bottom: 1px #FD9393 solid;}
