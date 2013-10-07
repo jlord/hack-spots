@@ -306,11 +306,14 @@ function addTileLayer(map, tileLayer) {
 
 function addMarkerLayer(geoJSON, map, zoomLevel) {
   var viewCoords = [geoJSON[0].geometry.coordinates[1], geoJSON[0].geometry.coordinates[0]]
-  var markerLayer = L.mapbox.markerLayer(geoJSON)
-  markerLayer.setGeoJSON(geoJSON)
   map.setView(viewCoords, zoomLevel)
-  // map.fitBounds(geoJSON)
-  markerLayer.addTo(map)
+
+  // Clustering
+  var markers = new L.MarkerClusterGroup()
+  var markerLayer = L.mapbox.markerLayer(geoJSON)
+  markers.addLayer(markerLayer)
+  map.addLayer(markers)
+
   return markerLayer
 }
 
