@@ -94,6 +94,10 @@
 		<p><strong><span class="red-text">{{numberOfSpots}}</span> hack spots strong!</p>
 	</script>
 
+	<script id="popUps" type="text/html">
+		<h2>{{ name }}</h2>
+	</script>
+
 	<script id="selectedSpot" type="text/html">
 		{{#rows}}
 			<h4 class="fauxButton">SELECTED SPOT</h4>
@@ -192,7 +196,7 @@
 			// interactions that we want
 			function addPopups(map, markerLayer) {
 				markerLayer.eachLayer(function(marker) {
-					var popupContent = '<h2>' + marker.feature.opts.name + '</h2>'
+					var popupContent = ich.popUps(marker.feature.opts)
 					marker.bindPopup(popupContent, {closeButton: false,})
 				})
 			  markerLayer.on('click', function(e) {
