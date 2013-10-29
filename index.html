@@ -191,6 +191,10 @@
 			// design the popups to have the content and
 			// interactions that we want
 			function addPopups(map, markerLayer) {
+				markerLayer.eachLayer(function(marker) {
+					var popupContent = '<h2>' + marker.feature.opts.name + '</h2>'
+					marker.bindPopup(popupContent, {closeButton: false,})
+				})
 			  markerLayer.on('click', function(e) {
 			  // clear any selected rows	
 				$('.spotRow').removeClass("selectedRow")
@@ -211,9 +215,6 @@
 			 	}) 
 			  $('#latestSpot').css("display", "none")
 			  $('#selectedSpot').html(selectedSpot).css("display", "inline")
-			  var feature = e.layer.feature
-			  var popupContent = '<h2>' + feature.opts.name + '</h2>'
-			  e.layer.bindPopup(popupContent, {closeButton: false,})
 			  })
 			}
 
