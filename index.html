@@ -94,6 +94,10 @@
 		<p><strong><span class="red-text">{{numberOfSpots}}</span> hack spots strong!</p>
 	</script>
 
+	<script id="popUps" type="text/html">
+		<h2>{{ name }}</h2>
+	</script>
+
 	<script id="selectedSpot" type="text/html">
 		{{#rows}}
 			<h4 class="fauxButton">SELECTED SPOT</h4>
@@ -191,6 +195,10 @@
 			// design the popups to have the content and
 			// interactions that we want
 			function addPopups(map, markerLayer) {
+				markerLayer.eachLayer(function(marker) {
+					var popupContent = ich.popUps(marker.feature.opts)
+					marker.bindPopup(popupContent, {closeButton: false,})
+				})
 			  markerLayer.on('click', function(e) {
 			  // clear any selected rows	
 				$('.spotRow').removeClass("selectedRow")
@@ -211,9 +219,6 @@
 			 	}) 
 			  $('#latestSpot').css("display", "none")
 			  $('#selectedSpot').html(selectedSpot).css("display", "inline")
-			  var feature = e.layer.feature
-			  var popupContent = '<h2>' + feature.opts.name + '</h2>'
-			  e.layer.bindPopup(popupContent, {closeButton: false,})
 			  })
 			}
 
