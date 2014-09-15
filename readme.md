@@ -10,7 +10,7 @@ In a bit I'll do some more refining (and documentation) - but here's a fun fact:
 
 This repo only has a **gh-pages** branch, which means as soon as you **fork** it, you have a hosted and live version of it yourself! 
 
-Next, create a spreadsheet with the same column headers as [the original](https://docs.google.com/spreadsheet/ccc?key=0Ao5u1U6KYND7dFVkcnJRNUtHWUNKamxoRGg4ZzNiT3c#gid=0).
+Next, create a spreadsheet with the same column headers as [the original](https://docs.google.com/a/github.com/spreadsheets/d/1hnfQcggYcBYimuO_UOMvwoOi_I9vUvFpkMt4wjrrpLE/edit#gid=0).
 
 Click on the `index.html` file, click edit and change **line 118** (or thereabouts) it looks like: 
 
