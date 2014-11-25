@@ -8,7 +8,9 @@ This is the code for a website that shows the spots myself, my friends (or Twitt
 
 In a bit I'll do some more refining (and documentation) - but here's a fun fact:
 
-This repo only has a **gh-pages** branch, which means as soon as you **fork** it, you have a hosted and live version of it yourself! 
+GitHub gives free hosting for every repository (see [GitHub Pages](http://pages.github.com)). 
+
+This repo only has a **gh-pages** branch, the branch GitHub hosts, which means as soon as you **fork** it, you have a hosted and live version of it yourself! 
 
 Next, create a spreadsheet with the same column headers as [the original](https://docs.google.com/a/github.com/spreadsheets/d/1hnfQcggYcBYimuO_UOMvwoOi_I9vUvFpkMt4wjrrpLE/edit#gid=0).
 
