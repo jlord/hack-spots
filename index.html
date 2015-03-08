@@ -2,8 +2,6 @@
 	<head>
 		<title>Hack Spots</title>
 		<meta charset='utf-8'>
-		<script type="text/javascript" src="js/ICanHaz.js"></script>
-		<script type="text/javascript" src='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.js'></script>
 		<script type="text/javascript" src='js/jquery.js '></script>
 		<script type="text/javascript" src='js/tabletop1.3.4.js'></script>
 		<script type="text/javascript" src='js/sheetsee.js'></script>
@@ -64,7 +62,6 @@
 		<tr><th class="tHeader">Name</th><th class="tHeader">Address</th><th class="tHeader">City</th><th class="tHeader">State</th><th class="tHeader">Country</th><th class="">Elsewhere</th></tr>
 		  {{#rows}}
 		  	<tr id="{{rowNumber}}" class="spotRow"><td>{{name}}</td><td>{{address}}</td><td>{{city}}</td><td>{{state}}</td><td>{{country}}</td><td><a class="button" href="https://maps.google.com/maps?q={{address}},{{city}},{{state}}" target="_blank">G Map</a> <a class="button" href="http://www.yelp.com/search?find_desc={{name}}&find_loc={{city}},{{state}}" target="_blank">Yelp</a></td></tr>
-		  	<tr class="hideRow"><td>wifi: {{wifipassword}}</td></tr>
 		  {{/rows}}
 	  </table>
 	</script>
@@ -131,9 +128,14 @@
 
 	  function showInfo(gData) {
 	  	window.gData = gData
+	  	tableOptions = {
+	  		"data": gData,
+	  		"tableDiv": "#hackSpotsTable",
+	  		"filterDiv": "#tableFilter"
+	  	}
 	  	// make the table, and the search bar
-	  	Sheetsee.makeTable(gData, "#hackSpotsTable")
-	  	Sheetsee.initiateTableFilter(gData, "#tableFilter", "#hackSpotsTable")
+	  	Sheetsee.makeTable(tableOptions)
+	  	Sheetsee.initiateTableFilter(tableOptions)
 
 	  	// when someone clicks on a row, highlight it and
 	  	// re-center the map
@@ -142,14 +144,14 @@
 	 			var rowNumber = $(this).closest("tr").attr("id")
 	 			$('#' + rowNumber).addClass("selectedRow")
 	 			var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
-	 			var selectedSpot = ich.selectedSpot({
+	 			var selectedSpot = Sheetsee.ich.selectedSpot({
 				  rows: dataElement
 			  })
 			  $('#latestSpot').css("display", "none")
 			  $('#selectedSpot').html(selectedSpot).css("display", "inline")
 			  var selectedCoords = [dataElement[0].lat, dataElement[0].long]
 			  matchGeoJSONbyRowNumber(rowNumber, geoJSON, gData, "#FF4646")
-			  var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 13)
+			  var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ name }}</h2>")
 				addPopups(map, markerLayer)
 			  map.panTo(selectedCoords, 13)
 	 		})
@@ -171,7 +173,7 @@
 	  	// info filled in (to prevent map breaking if
 	  	// someone is currently editing spreadsheet)
 	  	var theLatestSpot = findLatestCompleteSpot(gData)
-		  var latestSpot = ich.latestSpot({
+		  var latestSpot = Sheetsee.ich.latestSpot({
 			   rows: theLatestSpot
 		  })
 			$('#latestSpot').html(latestSpot)
@@ -191,14 +193,14 @@
 		  // create map, tilelayer (map background), markers and popups
 			var map = Sheetsee.loadMap("map")
 			Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
-			var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 13)
+			var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map)
 			addPopups(map, markerLayer)
 
 			// design the popups to have the content and
 			// interactions that we want
 			function addPopups(map, markerLayer) {
 				markerLayer.eachLayer(function(marker) {
-					var popupContent = ich.popUps(marker.feature.opts)
+					var popupContent = Sheetsee.ich.popUps(marker.feature.opts)
 					marker.bindPopup(popupContent, {closeButton: false,})
 				})
 			  markerLayer.on('click', function(e) {
@@ -216,7 +218,7 @@
 				// using row number, get the data for the selected spot
 			  var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
 			  // take those details and re-write the selected spot section
-				var selectedSpot = ich.selectedSpot({
+				var selectedSpot = Sheetsee.ich.selectedSpot({
 				  rows: dataElement
 			 	})
 			  $('#latestSpot').css("display", "none")
@@ -226,7 +228,7 @@
 
 			$('.resetMap').click(function() {
 				$('.spotRow').removeClass("selectedRow")
-				markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, 13)
+				markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ name }}</h2>")
 				addPopups(map, markerLayer)
 				$('#latestSpot').css("display", "inline")
 			  $('#selectedSpot').css("display", "none")
@@ -234,7 +236,7 @@
 
 			// find total number of spots added
 			var numberOfSpots = gData.length
-			var theNumberofSpots = ich.theNumberofSpots({
+			var theNumberofSpots = Sheetsee.ich.theNumberofSpots({
 		  	numberOfSpots: numberOfSpots
 	 	 	})
 			$('#theNumberofSpots').html(theNumberofSpots)
