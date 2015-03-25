@@ -130,7 +130,7 @@
 		// so long, so messy
 
 	  function showInfo(gData) {
-	  	gData
+	  	window.gData = gData
 	  	// make the table, and the search bar
 	  	Sheetsee.makeTable(gData, "#hackSpotsTable")
 	  	Sheetsee.initiateTableFilter(gData, "#tableFilter", "#hackSpotsTable")
