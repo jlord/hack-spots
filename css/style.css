@@ -12,7 +12,7 @@
 
   table {text-align: left; width: 100%}
   th {padding: 10px 0px;}
-  td, text {padding: 3px 20px 3px 0px; font-size: 14px;}
+  td, text {padding: 3px 0 3px 0; font-size: 14px;}
   #tableFilter {margin: 12px 0px; border: none; border-bottom: 1px solid #333; background-color: transparent; padding: 0px; font-family: Merriweather; color: #fff; font-size: 13px; height: 22px;}
   .noMatches {margin-left: 20px; font-size: 11px; font-style: italic; visibility: hidden;}
 
