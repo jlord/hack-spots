@@ -152,10 +152,11 @@
             })
             // set it and pan to it
             $('#latestSpot').html(latestSpot)
-            map.panTo([theLatestSpot.lat, theLatestSpot.long])
+            map.setView([theLatestSpot.lat, theLatestSpot.long], 14)
 
             // when someone clicks on a row, highlight it and
             // re-center the map
+            // TODO show popup, change marker color
             $('.spotRow').live("click", function(event) {
                 $('.spotRow').removeClass("selectedRow")
                 var rowNumber = $(this).closest("tr").attr("id")
@@ -167,7 +168,7 @@
                 $('#latestSpot').css("display", "none")
                 $('#selectedSpot').html(selectedSpot).css("display", "inline")
                 var selectedCoords = [dataElement[0].lat, dataElement[0].long]
-                map.panTo(selectedCoords)
+                map.setView(selectedCoords, 14)
             })
 
             // so that the first map and info that loads
