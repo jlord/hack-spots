@@ -135,8 +135,6 @@
             // useful bits from the original data
             var optionsJSON = ["name", "address", "city", "rowNumber"]
             var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
-            // change the color of the most recently added spot's marker
-            geoJSON[geoJSON.length - 1].properties["marker-color"] = "#FF4646"
 
             // create map, tilelayer (map background), markers and popups
             var map = Sheetsee.loadMap("map")
