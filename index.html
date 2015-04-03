@@ -219,17 +219,16 @@
             })
             $('#theNumberofSpots').html(theNumberofSpots)
 
-            filterOnHash()
-        }
-
-        window.onhashchange = filterOnHash
-
-        function filterOnHash() {
             if(window.location.hash) {
                 $('#tableFilter').val(window.location.hash.substring(1)).keyup()
                 $('.spotRow').first().click()
             }
         }
+
+        $(document).on('keyup', '#tableFilter', function() {
+            window.location.hash = $(this).val()
+            $('.spotRow').first().click()
+        })
     </script>
 </body>
 </html>
